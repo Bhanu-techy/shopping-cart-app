@@ -8,12 +8,12 @@
 
 The goal is to develop a functional web service and a React-based frontend that handles the basic lifecycle of an e-commerce transaction: **User Creation → Authentication → Cart Management → Order Placement**.
 
-> **Important Note: Single-Device Session Management**
+**Important Note: Single-Device Session Management**
 To ensure a user is only logged in from a single device at a time, the application must maintain a single active token for each user. This is achieved by:
-> 
-> 1. **Storage**: Storing the generated JWT token in the `users` table/collection upon successful login.
-> 2. **Prevention**: Checking if a token already exists in the user's record during a login attempt. If a token is present, the system denies access and the frontend displays a popup: *"You cannot login on another device."*
-> 3. **Cleanup**: Removing the token from the database record when the user logs out, allowing them to log in again (on the same or a different device).
+
+1. **Storage**: Storing the generated JWT token in the `users` table/collection upon successful login.
+2. **Prevention**: Checking if a token already exists in the user's record during a login attempt. If a token is present, the system denies access and the frontend displays a popup: *"You cannot login on another device."*
+3. **Cleanup**: Removing the token from the database record when the user logs out, allowing them to log in again (on the same or a different device).
 
 ## 2. Technical Requirements
 

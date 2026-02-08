@@ -1,18 +1,19 @@
-const express = require("express")
-const app = express()
-const sqlite3 = require('sqlite3').verbose()
-const bcrypt = require('bcrypt')
-const jwt = require("jsonwebtoken")
-const db = new sqlite3.Database('./database.db')
+const express = require("express");
+const app = express();
+const sqlite3 = require('sqlite3').verbose();
+const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const db = new sqlite3.Database('./database.db');
+const cors=require('cors');
 
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 db.serialize(()=>{
    db.run("PRAGMA foreign_keys = ON");
-   
-   
-})
+});
 
+// POST API to add new user
 app.post('/users', async (req, res) =>{
     const {username, password} = req.body
     
@@ -30,6 +31,7 @@ app.post('/users', async (req, res) =>{
     })
 })
 
+// GET API to get all users
 app.get('/users', async (req, res)=>{
     db.all(`select * from users`,(err, rows)=>{
         if (err) return res.status(500).json({error: "Err"})
@@ -37,6 +39,7 @@ app.get('/users', async (req, res)=>{
     })
 })
 
+// POST API to login user
 app.post('/users/login', async (req, res)=>{
     const {username, password}= req.body
 
@@ -68,6 +71,7 @@ app.post('/users/login', async (req, res)=>{
     })
 })
 
+// POST API to logout user
 app.post('/users/logout', async (req, res)=>{
     const {userId} = req.body
     db.get(`select * from users where id = ?`, [userId], (err)=>{
@@ -79,6 +83,7 @@ app.post('/users/logout', async (req, res)=>{
     })
 })
 
+// GET API to get list of items
 app.get('/items', (req, res)=>{
     db.all(`select * from carts`, (err, rows)=>{
         if (err) return res.json({error : err})
@@ -86,6 +91,7 @@ app.get('/items', (req, res)=>{
     })
 })
 
+// POST API to add cart of a user
 app.post('/carts', (req, res)=>{
     const {userId, name, status} = req.body
     db.run(`insert into carts (user_id, name, status) values (?, ?, ?)`, [userId, name, status], (err)=>{
@@ -94,7 +100,7 @@ app.post('/carts', (req, res)=>{
     })
 })
 
-
+// POST API to add order
 app.post('/orders', (req, res)=>{
     const {userId, cartId} = req.body
     db.run(`insert into orders (user_id, cart_id) values (?, ?)`, [userId, cartId], (err)=>{
@@ -103,6 +109,7 @@ app.post('/orders', (req, res)=>{
     })
 })
 
+// GET API to get order
 app.get('/orders', (req, res)=>{
     db.all(`select * from orders`, (err, rows)=>{
         if (err) return res.json({error : err})
@@ -110,6 +117,7 @@ app.get('/orders', (req, res)=>{
     })
 })
 
+// GET API
 app.get('/orders/checkout', async (req, res)=>{
    
     db.get(`select * carts where user_id = 1`, (err, rows)=>{
