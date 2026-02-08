@@ -15,14 +15,17 @@ function Login() {
         event.preventDefault()
 
     const userDetails = {username, password}
-    const url = 'https://shopping-cart-app-g9ye.onrender.com/users/login'
+    const url = 'http://localhost:5000/users/login'
     const options = {
       method: 'POST',
+      headers : {"Content-Type" : "application/json"},
       body: JSON.stringify(userDetails),
     }
+
+    console.log(userDetails)
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(data)
+  
     if (response.ok) {
       Cookies.set('jwt_token', data.jwt_token, {expires: 30})
       navigate("/home", {replace : true})

@@ -46,8 +46,7 @@ app.post('/users/login', async (req, res)=>{
     db.get(`select * from users where username = '${username}'`, async (err, user)=>{
         if (err) return res.json({error : err})
         if (user === undefined){
-            res.status(400)
-            res.json({error_msg : "Invalid User"});
+            return res.status(400).json({error_msg : "Invalid User"});
         }else{
             const isPasswordMatched = await bcrypt.compare(password, user.password);
             
@@ -64,8 +63,7 @@ app.post('/users/login', async (req, res)=>{
                     res.json({error_msg : "user already login"})
                 }
             }else{
-                res.status(400);
-                res.json({error_msg : "Invalid Password"})
+                res.status(400).json({error_msg : "Invalid Password"})
             }
         }
     })
