@@ -60,7 +60,7 @@ app.post('/users/login', async (req, res)=>{
                     res.json({id : user.id, jwt_token: jwtToken})
                 })
                 }else{
-                    return res.status(400).json({error_msg : "user already login"})
+                    return res.status(400).json({error_msg : "user already logged in on another device"})
                 }
             }else{
                 res.status(400).json({error_msg : "Invalid Password"})

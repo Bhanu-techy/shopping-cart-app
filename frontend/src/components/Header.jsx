@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 function Header() {
-
-    const token = Cookies.get('jwt_token')
-
+    const userId = Cookies.get('userId')
     const navigate = useNavigate()
 
     const onClickLogout = async () => {
-    const userDetails = {userId : 2}
+    const userDetails = {userId}
     const url = 'https://shopping-cart-app-g9ye.onrender.com/users/logout'
     const options = {
       method: 'POST',
@@ -18,13 +16,14 @@ function Header() {
     }
      const response = await fetch(url, options)
      if (response.ok){
-        navigate("/",  {replace : true})
+        navigate("/login",  {replace : true})
+        Cookies.remove('jwt_token')
      }
 
     }
     
   return (
-    <div className='w-full h-[10vh] flex justify-between items-center p-5'>
+    <div className='w-full h-[10vh] bg-gray-200 flex justify-between items-center p-5'>
         <h2>Shoppy</h2>
         <button className='bg-blue-500 text-white rounded w-[90px]' onClick={onClickLogout}>Logout</button>
     </div>

@@ -23,10 +23,11 @@ function Login() {
     }
     const response = await fetch(url, options)
     const data = await response.json()
-  
+    
     if (response.ok) {
       Cookies.set('jwt_token', data.jwt_token, {expires: 30})
-      navigate("/home", {replace : true})
+      Cookies.set("userId", data.id)
+      navigate("/", {replace : true})
       
     } else {
       setErrmsg(data.error_msg)
