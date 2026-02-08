@@ -21,13 +21,13 @@ function Home() {
   return (
     <>
     <Header/>
-        <div>
-        <h1>Products</h1>
-        <ul className='flex flex-wrap '>
+        <div className='p-3'>
+        <h1 className='text-center text-3xl font-serif text-orange-500 m-3'>Products List</h1>
+        <ul className='flex flex-wrap m-2'>
             {items.map(each => (
-                <li className='border rounded p-2 m-2 w-[200px]'>
-                    <p>Item Name: {each.name}</p>
-                    <p>Staus : {each.status}</p>
+                <li className='shadow-lg shadow-purple-200 rounded p-3 m-5 w-[240px] h-[90px] hover:shadow-yellow-200 flex flex-col justify-center items-center'>
+                    <p>Product Name: {each.name}</p>
+                    <p>Status : {each.status}</p>
                 </li>
             ))}
         </ul>

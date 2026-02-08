@@ -23,7 +23,7 @@ function Header() {
     }
     
   return (
-    <div className='w-full h-[10vh] bg-gray-200 flex justify-between items-center p-5'>
+    <div className='w-full h-[10vh] bg-blue-100 flex justify-between items-center p-5'>
         <h2>Shoppy</h2>
         <button className='bg-blue-500 text-white rounded w-[90px]' onClick={onClickLogout}>Logout</button>
     </div>
