@@ -15,14 +15,12 @@ function Login() {
         event.preventDefault()
 
     const userDetails = {username, password}
-    const url = 'http://localhost:5000/users/login'
+    const url = 'https://shopping-cart-app-g9ye.onrender.com/users/login'
     const options = {
       method: 'POST',
       headers : {"Content-Type" : "application/json"},
       body: JSON.stringify(userDetails),
     }
-
-    console.log(userDetails)
     const response = await fetch(url, options)
     const data = await response.json()
   
@@ -40,7 +38,7 @@ function Login() {
     <div className="w-screen h-screen flex justify-center items-center">
         <div className='w-[450px] h-[350px] rounded shadow-lg shadow-blue-200 flex justify-center items-center '>
           <form onSubmit={submitForm} className='h-[90%] w-[100%] flex flex-col justify-between items-center'>
-          <h1 className='text-blue-600 text-2xl'>Login</h1>
+          <h1 className='text-blue-600 text-2xl font-mono'>Login</h1>
           <div className="flex flex-col w-[300px] m-3">
                   <label htmlFor="username">USERNAME</label>
                   <input

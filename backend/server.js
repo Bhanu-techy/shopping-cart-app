@@ -57,10 +57,10 @@ app.post('/users/login', async (req, res)=>{
                 if(user.token === null){
                 db.run(`UPDATE users SET token = ? WHERE username= ?`,[jwtToken, username], (err)=>{
                     if (err) return res.status(500).json({error: 'Token updated failed'})
-                    res.json({id : user.id, jwtToken})
+                    res.json({id : user.id, jwt_token: jwtToken})
                 })
                 }else{
-                    res.json({error_msg : "user already login"})
+                    return res.status(400).json({error_msg : "user already login"})
                 }
             }else{
                 res.status(400).json({error_msg : "Invalid Password"})
