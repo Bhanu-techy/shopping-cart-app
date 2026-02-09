@@ -83,7 +83,7 @@ app.post('/users/logout', async (req, res)=>{
 
 // GET API to get list of items
 app.get('/items', (req, res)=>{
-    db.all(`select * from carts`, (err, rows)=>{
+    db.all(`select * from items`, (err, rows)=>{
         if (err) return res.json({error : err})
         res.json(rows)
     })
