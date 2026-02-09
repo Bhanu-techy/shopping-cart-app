@@ -83,7 +83,7 @@ app.post('/users/logout', async (req, res)=>{
 
 // GET API to get list of items
 app.get('/items', (req, res)=>{
-    db.all(`select * from items`, (err, rows)=>{
+    db.all(`select * from carts`, (err, rows)=>{
         if (err) return res.json({error : err})
         res.json(rows)
     })
@@ -95,6 +95,14 @@ app.post('/carts', (req, res)=>{
     db.run(`insert into carts (user_id, name, status) values (?, ?, ?)`, [userId, name, status], (err)=>{
         if (err) return res.json({error : err})
         res.json({message : "Added item to cart successfully"})
+    })
+})
+
+app.get("/cart/:Id", async (req, res)=>{
+    const {Id} = req.params
+    db.get(`select * from carts where id = ?`,[Id], (err, row)=>{
+        if (err) return res.json({error : err})
+        res.json(row)
     })
 })
 
@@ -117,7 +125,6 @@ app.get('/orders', (req, res)=>{
 
 // GET API
 app.get('/orders/checkout', async (req, res)=>{
-   
     db.get(`select * carts where user_id = 1`, (err, rows)=>{
         if (err) return res.json({error : err})
         return res.json(rows)
@@ -125,5 +132,5 @@ app.get('/orders/checkout', async (req, res)=>{
 })
 
 app.listen(5000, ()=> {
-    console.log("server running")
+    console.log("server running on http://localhost:5000")
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 function Header() {
@@ -25,6 +25,10 @@ function Header() {
   return (
     <div className='w-full h-[10vh] bg-blue-100 flex justify-between items-center p-5'>
         <h2>Shoppy</h2>
+        <nav className='flex justify-between w-[200px]'>
+          <Link to='/' className='text-purple-700 font-serif underline'>Home</Link>
+          <Link to='/cart' className='text-lg text-purple-700 font-serif underline'>Cart</Link>
+        </nav>
         <button className='bg-blue-500 text-white rounded w-[90px]' onClick={onClickLogout}>Logout</button>
     </div>
   )
