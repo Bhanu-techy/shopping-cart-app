@@ -5,13 +5,13 @@ import Header from './Header'
 
 function Cart() {
 
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState({})
 
   const userId = Cookies.get("userId")
 
   useEffect(()=>{
     const getCartDetails = async () =>{
-      axios.get(`http://localhost:5000/cart/${userId}`)
+      axios.get(`https://shopping-cart-app-g9ye.onrender.com/cart/${userId}`)
             .then((response) => {
                 setCart(response.data)
             })
@@ -30,7 +30,8 @@ function Cart() {
     <div className='flex flex-col justify-center items-center p-3 w-full'>
       <h1>My Cart</h1>
       <div className='flex justify-around bg-gray-200 w-[80%] p-2 m-2 rounded'>
-        
+        <p>Name : {cart.name}</p>
+        <p>Status  : {cart.status}</p>
       </div>
     </div>
     </>

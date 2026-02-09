@@ -138,7 +138,8 @@ app.get('/orders', (req, res)=>{
 
 // GET API
 app.get('/orders/checkout', async (req, res)=>{
-    db.get(`select * carts where user_id = 1`, (err, rows)=>{
+    const {userId} = req.body
+    db.get(`select * carts where user_id = ?`,[userId], (err, rows)=>{
         if (err) return res.json({error : err})
         return res.json(rows)
     })
