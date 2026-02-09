@@ -24,12 +24,12 @@ function Header() {
     
   return (
     <div className='w-full h-[10vh] bg-blue-100 flex justify-between items-center p-5'>
-        <h2>Shoppy</h2>
+        <h2 className='text-pink-400 font-mono italic bg-pink-100 rounded-2xl p-1'>Shoppy</h2>
         <nav className='flex justify-between w-[200px]'>
           <Link to='/' className='text-purple-700 font-serif underline'>Home</Link>
           <Link to='/cart' className='text-lg text-purple-700 font-serif underline'>Cart</Link>
         </nav>
-        <button className='bg-blue-500 text-white rounded w-[90px]' onClick={onClickLogout}>Logout</button>
+        <button className='bg-blue-500 text-white rounded w-[70px] h-[30px] p-1' onClick={onClickLogout}>Logout</button>
     </div>
   )
 }

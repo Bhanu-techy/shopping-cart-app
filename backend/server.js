@@ -10,7 +10,8 @@ app.use(cors());
 app.use(express.json());
 
 db.serialize(()=>{
-   db.run("PRAGMA foreign_keys = ON");
+   db.run("PRAGMA foreign_keys = ON");   
+   db.run(`DELETE FROM cart_items WHERE cart_id = 1;`)
 });
 
 // POST API to add new user
@@ -90,11 +91,23 @@ app.get('/items', (req, res)=>{
 })
 
 // POST API to add cart of a user
-app.post('/carts', (req, res)=>{
+app.post('/carts', async (req, res)=>{
     const {userId, name, status} = req.body
-    db.run(`insert into carts (user_id, name, status) values (?, ?, ?)`, [userId, name, status], (err)=>{
+
+    const createCartQuery = `
+      INSERT INTO carts (user_id, name, status)
+      VALUES (?, ?, ?)
+    `;
+    const cartResult = await db.run(createCartQuery, [userId, name, status]);
+    const cartId = cartResult.lastID;
+    res.json({cartId})
+
+})
+
+app.get('/carts', (req, res)=>{
+    db.all(`select * from carts`, (err, rows)=>{
         if (err) return res.json({error : err})
-        res.json({message : "Added item to cart successfully"})
+        res.json(rows)
     })
 })
 

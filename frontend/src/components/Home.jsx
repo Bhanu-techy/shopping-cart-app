@@ -25,7 +25,7 @@ function Home() {
         <h1 className='text-center text-3xl font-serif text-orange-500 m-3'>Products List</h1>
         <ul className='flex flex-wrap m-2'>
             {items.map(each => (
-                <li className='shadow-lg shadow-purple-200 rounded p-3 m-5 w-[240px] h-[90px] hover:shadow-yellow-200 flex flex-col justify-center items-center'>
+                <li key={each.id} className='shadow-lg shadow-purple-200 rounded p-3 m-5 w-[240px] h-[90px] hover:shadow-yellow-200 flex flex-col justify-center items-center'>
                     <p>Product Name: {each.name}</p>
                     <p>Status : {each.status}</p>
                 </li>
